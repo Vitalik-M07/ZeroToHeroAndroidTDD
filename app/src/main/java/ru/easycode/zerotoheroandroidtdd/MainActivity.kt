@@ -8,24 +8,26 @@ import androidx.appcompat.app.AppCompatActivity
 class MainActivity : AppCompatActivity() {
 
     // Declare lateinit variables
-    private lateinit var textView: TextView
-    private lateinit var button: Button
+//    private lateinit var textView: TextView
+//    private lateinit var button: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main) // Fix the closing parenthesis here
 
-        textView = findViewById(R.id.titleTextView)
-        button = findViewById(R.id.changeButton)
+        val button: Button = findViewById(R.id.changeButton)
+        val textView: TextView = findViewById(R.id.titleTextView)
+        //button = findViewById(R.id.changeButton)
 
         button.setOnClickListener {
-            changeText()
+            textView.text = "I am an Android Developer!"//
+        // changeText()
         }
     }
 
-    private fun changeText() {
-
-        val newText = "I am an Android Developer!"
-        textView.text = newText
-    }
+//    private fun changeText() {
+//
+//        val newText = "I am an Android Developer!"
+//        textView.text = newText
+//    }
 }
