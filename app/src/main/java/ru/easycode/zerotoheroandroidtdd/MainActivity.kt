@@ -36,6 +36,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateTextViewVisibility() {
-        textView.visibility = if (isTextViewVisible) View.VISIBLE else View.GONE
+        textView.visibility = if (isTextViewVisible) View.VISIBLE else View.INVISIBLE
     }
 }
