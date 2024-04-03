@@ -22,23 +22,37 @@ class MainActivity : AppCompatActivity() {
         val button = findViewById<Button>(R.id.removeButton)
 
         button.setOnClickListener {
-            if (!isTextViewRemoved) {
-                rootlayout.removeView(textView)
-                isTextViewRemoved = true
-            }
-        }
 
-        savedInstanceState?.let {
-            isTextViewRemoved = it.getBoolean("isTextViewRemoved", false)
-            if (isTextViewRemoved) {
                 rootlayout.removeView(textView)
+
             }
-        }
+
+
+//        savedInstanceState?.let {
+//            isTextViewRemoved = it.getBoolean("key", false)
+//            if (isTextViewRemoved) {
+//                rootlayout.removeView(textView)
+//            }
+//        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putBoolean("isTextViewRemoved", isTextViewRemoved)
+        //outState.putBoolean("isTextViewRemoved", isTextViewRemoved)
+        val removedTextView = rootlayout.childCount ==1
+        outState.putBoolean(KEY, removedTextView)
 
+    }
+
+    override fun onRestoreInstanceState(
+        savedInstanceState: Bundle
+    ) {
+        super.onRestoreInstanceState(savedInstanceState)
+        val removedTextView= savedInstanceState.getBoolean(KEY)
+        if(removedTextView)
+            rootlayout.removeView(textView)
+    }
+    companion object{
+        private const val KEY =  "key"
     }
 }
