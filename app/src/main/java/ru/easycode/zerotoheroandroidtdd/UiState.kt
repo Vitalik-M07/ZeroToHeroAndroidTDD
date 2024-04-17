@@ -1,33 +1,44 @@
-package ru.easycode.zerotoheroandroidtdd
-
+import android.view.View
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
-import java.io.Serializable
+import androidx.core.view.isVisible
+import kotlinx.coroutines.*
 
-interface UiState : Serializable {
-    fun apply(textView: TextView, actionButton: Button)
+interface UiState {
+    fun apply(textView: TextView, actionButton: Button, progressBar: ProgressBar)
 
     data class Base(private val text: String) : UiState {
-        override fun apply(textView: TextView, actionButton: Button) {
-            textView.text = text
-            actionButton.isEnabled= true
-            //incrementButton.isEnabled = true
+        override fun apply(textView: TextView, actionButton: Button, progressBar: ProgressBar) {
+            textView.visibility = View.INVISIBLE
+            actionButton.isEnabled = true
+            progressBar.isVisible = false
         }
     }
 
-    data class Max(private val text: String) : UiState {
-        override fun apply(textView: TextView, actionButton: Button) {
-            textView.text = text
-            actionButton.isEnabled = false // Disable button for Max state
-            //decrementButton.isEnabled= true
-        }
-    }
+    data class OnClick(private val text: String) : UiState {
+        override fun apply(textView: TextView, actionButton: Button, progressBar: ProgressBar) {
+            // Устанавливаем текст textView (если нужно)
+            // textView.text = text
 
-    data class Min(private val text: String) : UiState {
-        override fun apply(textView: TextView, actionButton: Button) {
-            textView.text = text
+            // Делаем textView недоступным
+            textView.isEnabled = true
+            textView.visibility = View.VISIBLE
+            progressBar.visibility = View.VISIBLE
+
+            // Делаем actionButton сначала недоступным, а затем доступным
             actionButton.isEnabled = false
-            //incrementButton.isEnabled = true// Ensure button is enabled for Min state
+
+            // Используем корутину для выполнения задержки
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(3500) // Задержка на 3.5 секунды
+
+
+                // После задержки, делаем actionButton доступным и скрываем progressBar
+                actionButton.isEnabled = true
+                progressBar.isVisible = false
+                    //progressBar.visibility  = View.GONE
+            }
         }
     }
 }
