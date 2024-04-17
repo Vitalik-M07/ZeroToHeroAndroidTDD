@@ -11,7 +11,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/progressBar"
-
+    android:visibility="gone"
     />
 
     <TextView
@@ -23,7 +23,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:id="@+id/titleTextView"
-        android:visibility="gone" />
+        android:visibility="visible"
+        />
 
     <Button
         android:layout_width="wrap_content"

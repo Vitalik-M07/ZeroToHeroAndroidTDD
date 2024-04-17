@@ -67,7 +67,7 @@ class Task014Test {
 
         onView(isRoot()).perform(waitTillDisplayed(R.id.titleTextView, 3500))
 
-        runBlocking { delay(4000) }
+        //runBlocking { delay(4000) }
         onView(withId(R.id.progressBar)).check(matches(not(isDisplayed())))
         onView(withId(R.id.actionButton)).check(matches(isEnabled()))
     }
